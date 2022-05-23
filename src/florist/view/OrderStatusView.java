@@ -18,7 +18,7 @@ public class OrderStatusView extends javax.swing.JFrame {
         initComponents();
         currentUserId = id;
         getTableDataTransaction();
-        buttonRecieved.setVisible(false);
+        clean();
     }
 
     private void getTableDataTransaction(){
@@ -27,6 +27,25 @@ public class OrderStatusView extends javax.swing.JFrame {
         tableModel = transaction.getTableModel();
         tableTransaction.setModel(tableModel);
         tableTransaction.setDefaultEditor(Object.class, null);
+    }
+    
+    private void clean(){
+        textProductName.setText("-");
+        textQty.setText("0");
+        textPrice.setText("0");
+        textCostumerName.setText("-");
+        textGreetings.setText("-");
+        textProductionDuration.setText("-");
+        textPhoneNumber.setText("-");
+        textAddress.setText("-");
+        textTotalPayment.setText("0");
+        textPaymentMethod.setText("-");
+        textPaymentInstruction.setText("-");
+        textStatus.setText("-");
+        textNote.setText("-");
+       
+        buttonRecieved.setVisible(false);
+        buttonCancel.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -47,23 +66,38 @@ public class OrderStatusView extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         textPhoneNumber = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        buttonCancel = new javax.swing.JButton();
         textTotalPayment = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         textPrice = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        textProductionDuration = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTransaction = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textNote = new javax.swing.JTextArea();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        textStatus = new javax.swing.JLabel();
+        textPaymentMethod = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        textPaymentInstruction = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        textGreetings = new javax.swing.JTextArea();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-        jPanel1.setVerifyInputWhenFocusTarget(false);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel1.setText("Order List");
+        jLabel1.setText("Custommer Order List");
 
         buttonRecieved.setBackground(new java.awt.Color(255, 153, 153));
         buttonRecieved.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -79,7 +113,7 @@ public class OrderStatusView extends javax.swing.JFrame {
 
         textProductName.setEditable(false);
         textProductName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        textProductName.setText("Product Name");
+        textProductName.setText("-");
         textProductName.setToolTipText("");
         textProductName.setMargin(new java.awt.Insets(8, 8, 8, 8));
         textProductName.addActionListener(new java.awt.event.ActionListener() {
@@ -92,18 +126,18 @@ public class OrderStatusView extends javax.swing.JFrame {
         jLabel7.setText("Address");
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel8.setText("Costumer Name");
+        jLabel8.setText("Customer Name");
 
         textAddress.setEditable(false);
         textAddress.setColumns(20);
         textAddress.setRows(5);
-        textAddress.setText("Address");
+        textAddress.setText("-");
         textAddress.setMargin(new java.awt.Insets(8, 8, 8, 8));
         jScrollPane2.setViewportView(textAddress);
 
         textCostumerName.setEditable(false);
         textCostumerName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        textCostumerName.setText("Name");
+        textCostumerName.setText("-");
         textCostumerName.setToolTipText("");
         textCostumerName.setMargin(new java.awt.Insets(8, 8, 8, 8));
         textCostumerName.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +162,7 @@ public class OrderStatusView extends javax.swing.JFrame {
 
         textPhoneNumber.setEditable(false);
         textPhoneNumber.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        textPhoneNumber.setText("Phone Number");
+        textPhoneNumber.setText("-");
         textPhoneNumber.setToolTipText("");
         textPhoneNumber.setMargin(new java.awt.Insets(8, 8, 8, 8));
         textPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +172,16 @@ public class OrderStatusView extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel10.setText("Costumer Phone Number");
+        jLabel10.setText("Customer Phone Number");
+
+        buttonCancel.setBackground(new java.awt.Color(255, 153, 153));
+        buttonCancel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        buttonCancel.setText("Cancel");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelActionPerformed(evt);
+            }
+        });
 
         textTotalPayment.setEditable(false);
         textTotalPayment.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
@@ -161,7 +204,7 @@ public class OrderStatusView extends javax.swing.JFrame {
 
         textPrice.setEditable(false);
         textPrice.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        textPrice.setText("Price");
+        textPrice.setText("0");
         textPrice.setToolTipText("");
         textPrice.setMargin(new java.awt.Insets(8, 8, 8, 8));
         textPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -170,22 +213,36 @@ public class OrderStatusView extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel2.setText("Order Details");
+        jLabel14.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel14.setText("Greetings Card");
+
+        jLabel16.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel16.setText("Production Duration");
+
+        textProductionDuration.setEditable(false);
+        textProductionDuration.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        textProductionDuration.setText("-");
+        textProductionDuration.setToolTipText("");
+        textProductionDuration.setMargin(new java.awt.Insets(8, 8, 8, 8));
+        textProductionDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textProductionDurationActionPerformed(evt);
+            }
+        });
 
         tableTransaction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID ORDER", "DATE", "PRODUCT", "STATUS"
+                "ID ORDER", "DATE", "PRODUCT", "QTY", "TOTAL PAYMENT", "PRODUCTION DURATION", "STATUS"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -199,101 +256,182 @@ public class OrderStatusView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableTransaction);
 
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel2.setText("Details Order");
+
+        textNote.setEditable(false);
+        textNote.setColumns(20);
+        textNote.setRows(5);
+        textNote.setText("-");
+        textNote.setMargin(new java.awt.Insets(8, 8, 8, 8));
+        jScrollPane4.setViewportView(textNote);
+
+        jLabel15.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel15.setText("Status Order:");
+
+        jLabel17.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel17.setText("Payment Method: ");
+
+        textStatus.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        textStatus.setText("Status");
+
+        textPaymentMethod.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        textPaymentMethod.setText("Payment");
+
+        jLabel20.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel20.setText("Payment Instruction: ");
+
+        textPaymentInstruction.setEditable(false);
+        textPaymentInstruction.setColumns(20);
+        textPaymentInstruction.setRows(5);
+        textPaymentInstruction.setText("-");
+        textPaymentInstruction.setMargin(new java.awt.Insets(8, 8, 8, 8));
+        jScrollPane5.setViewportView(textPaymentInstruction);
+
+        textGreetings.setEditable(false);
+        textGreetings.setColumns(20);
+        textGreetings.setRows(5);
+        textGreetings.setText("-");
+        textGreetings.setMargin(new java.awt.Insets(8, 8, 8, 8));
+        jScrollPane6.setViewportView(textGreetings);
+
+        jLabel18.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel18.setText("Cancel Reason:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonRecieved, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel7)
-                            .addComponent(textPhoneNumber)
-                            .addComponent(textCostumerName)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel16)
+                            .addComponent(textProductionDuration)
                             .addComponent(textPrice)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(textProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(textProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(textQty, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(10, 10, 10)
-                        .addComponent(textTotalPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(buttonRecieved, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(34, 34, 34)
-                    .addComponent(jLabel2)
-                    .addContainerGap(1123, Short.MAX_VALUE)))
+                                    .addComponent(textQty, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)))
+                            .addComponent(jScrollPane6))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textTotalPayment))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane2)
+                            .addComponent(textPhoneNumber)
+                            .addComponent(textCostumerName, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textPaymentMethod, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel18)))
+                    .addComponent(jScrollPane1))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(520, 520, 520)
-                        .addComponent(jLabel11))
+                        .addGap(466, 466, 466)
+                        .addComponent(jLabel11)
+                        .addGap(0, 200, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(textProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(textQty, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(textProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textQty, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textProductionDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textCostumerName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(textTotalPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12))))))
-                .addGap(18, 18, 18)
-                .addComponent(buttonRecieved, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(39, 39, 39)
-                    .addComponent(jLabel2)
-                    .addContainerGap(649, Short.MAX_VALUE)))
+                                    .addComponent(jLabel12)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel17)
+                                    .addComponent(textPaymentMethod))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(textStatus))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonRecieved, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,96 +448,174 @@ public class OrderStatusView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 720, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textPriceActionPerformed
-
-    private void textTotalPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTotalPaymentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textTotalPaymentActionPerformed
-
-    private void textPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPhoneNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textPhoneNumberActionPerformed
-
-    private void textQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textQtyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textQtyActionPerformed
-
-    private void textCostumerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCostumerNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCostumerNameActionPerformed
-
-    private void textProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textProductNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textProductNameActionPerformed
-
     private void buttonRecievedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRecievedActionPerformed
-        int option = JOptionPane.showConfirmDialog(rootPane, "Are you sure to order this product?", "Order Confirmation", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(rootPane, "Are you sure to recieve this product?", "Recieved Confirmation", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.NO_OPTION){
             //Do nothing
         } else if (option == JOptionPane.YES_OPTION){
             int row = tableTransaction.getSelectedRow();
             int idTransaction = (int) tableModel.getValueAt(row, 0);
             transaction.setId(idTransaction);
-            transaction.setStatus("SUCCESS");
+            transaction.setStatus("RECIEVED");
             transaction.updateStatusTransaction();
-            getTableDataTransaction();
             
-            if (buttonRecieved.isVisible()){
-                buttonRecieved.setVisible(false);
-            }
-        }  
+            getTableDataTransaction();
+
+            buttonRecieved.setVisible(false);
+            buttonCancel.setVisible(false);
+            textStatus.setText("RECIEVED");
+            clean();
+        }
     }//GEN-LAST:event_buttonRecievedActionPerformed
+
+    private void textProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textProductNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textProductNameActionPerformed
+
+    private void textCostumerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCostumerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCostumerNameActionPerformed
+
+    private void textQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textQtyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textQtyActionPerformed
+
+    private void textPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPhoneNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textPhoneNumberActionPerformed
+
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        int row = tableTransaction.getSelectedRow();
+        int idTransaction = (int) tableModel.getValueAt(row, 0);
+        CustomerCancelOrderView cancelOrderView = new CustomerCancelOrderView(idTransaction, currentUserId);
+        cancelOrderView.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_buttonCancelActionPerformed
+
+    private void textTotalPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTotalPaymentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textTotalPaymentActionPerformed
+
+    private void textPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textPriceActionPerformed
+
+    private void textProductionDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textProductionDurationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textProductionDurationActionPerformed
 
     private void tableTransactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTransactionMouseClicked
         int row = tableTransaction.getSelectedRow();
         int idTransaction = (int) tableModel.getValueAt(row, 0);
         detailTransaction.setId(idTransaction);
         detailTransaction.getDetailTransaction();
-        
+
         NumberFormat currency = NumberFormat.getCurrencyInstance(new Locale("in", "ID"));
-         
+
         String product = detailTransaction.getProduct();
         int qty = detailTransaction.getQty();
         String strQty = String.valueOf(qty);
         int price = detailTransaction.getPrice();
         String strPrice = currency.format(price);
+        String greetings = detailTransaction.getGreetings();
+        int productDuration = detailTransaction.getProductionDuration();
+        String strProductDuration = String.valueOf(productDuration) + " Day";
         String costumer = detailTransaction.getCostumer();
         String phoneNumber = detailTransaction.getPhoneNumber();
         String address = detailTransaction.getAddress();
         int totalPayment = detailTransaction.getTotalPayment();
         String strTotalPayment = currency.format(totalPayment);
-        
+        String status = detailTransaction.getStatus();
+        String note = detailTransaction.getNote();
+        String paymentMethodCode = detailTransaction.getPaymentMethod();
+        String paymentMethod;
+        switch (paymentMethodCode) {
+            case "TRF":
+            paymentMethod = "TRANSFER";
+            switch (status) {
+                case "ORDERED":
+                    textPaymentInstruction.setText("Transaction has been register.\n" +
+                            "To complate the transaction please Transfer To\n" +
+                            "Rek: 088888888 AN: NI KT CATUR ADI SUKMA APSARI\n" +
+                            "and send evidence of transfer to WA: 0888888888 with message \n" +
+                            "ID TRANSACTION: (ID ORDER in table list order)");
+                    break;
+                case "CANCEL":
+                    textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
+                    break;
+                default:
+                    textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
+                    break;
+            }
+            break;
+
+            case "COD":
+            paymentMethod = "CASH ON DELIVERY";
+            switch (status) {
+                case "RECIEVED":
+                    textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
+                    break;
+                case "CANCEL":
+                    textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
+                    break;
+                default:
+                    textPaymentInstruction.setText("Transaction has been register.\n" +
+                        "To complate the transaction please preprare money when \n" +
+                        "the courier arrives");
+                    break;
+            }
+            break;
+
+            default:
+            paymentMethod = "";
+            break;
+        }
+
         textProductName.setText(product);
         textQty.setText(strQty);
         textPrice.setText(strPrice);
+        textGreetings.setText(greetings);
+        textProductionDuration.setText(strProductDuration);
         textCostumerName.setText(costumer);
         textPhoneNumber.setText(phoneNumber);
         textAddress.setText(address);
         textTotalPayment.setText(strTotalPayment);
-        
-        String status = (String) tableModel.getValueAt(row, 3);
-        
+        textPaymentMethod.setText(paymentMethod);
+        textStatus.setText(status);
+        textNote.setText(note);
+
         switch (status) {
             case "ORDERED":
-                buttonRecieved.setVisible(false);
-                break;
+            buttonRecieved.setVisible(false);
+            buttonCancel.setVisible(true);
+            break;
+            case "PROCECED":
+            buttonRecieved.setVisible(false);
+            buttonCancel.setVisible(false);
+            break;
             case "DELIVERY":
-                buttonRecieved.setVisible(true);
-                break;
+            buttonRecieved.setVisible(true);
+            buttonCancel.setVisible(false);
+            break;
             case "SUCCESS":
-                buttonRecieved.setVisible(false);
-                break;
+            buttonRecieved.setVisible(false);
+            buttonCancel.setVisible(false);
+            break;
+            case "CANCEL":
+            buttonRecieved.setVisible(false);
+            buttonCancel.setVisible(false);
+            break;
             default:
-                break;
+            break;
         }
     }//GEN-LAST:event_tableTransactionMouseClicked
 
@@ -439,13 +655,20 @@ public class OrderStatusView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonRecieved;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -453,13 +676,22 @@ public class OrderStatusView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable tableTransaction;
     private javax.swing.JTextArea textAddress;
     private javax.swing.JTextField textCostumerName;
+    private javax.swing.JTextArea textGreetings;
+    private javax.swing.JTextArea textNote;
+    private javax.swing.JTextArea textPaymentInstruction;
+    private javax.swing.JLabel textPaymentMethod;
     private javax.swing.JTextField textPhoneNumber;
     private javax.swing.JTextField textPrice;
     private javax.swing.JTextField textProductName;
+    private javax.swing.JTextField textProductionDuration;
     private javax.swing.JTextField textQty;
+    private javax.swing.JLabel textStatus;
     private javax.swing.JTextField textTotalPayment;
     // End of variables declaration//GEN-END:variables
 }

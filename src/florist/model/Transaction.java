@@ -17,6 +17,10 @@ public class Transaction extends DatabaseConnection {
     String address;
     String dateTime;
     String status;
+    String greetings;
+    String paymentMethod;
+    String note;
+    int productionDuration;
     DefaultTableModel tableModel = new DefaultTableModel();
     
     public void setId(int id){
@@ -55,6 +59,21 @@ public class Transaction extends DatabaseConnection {
         this.status = status;
     }
     
+    public void setNote(String note){
+        this.note = note;
+    }
+    
+    public void setGreetings(String greetings){
+        this.greetings = greetings;
+    }
+    
+    public void setPaymentMethod(String paymentMethod){
+        this.paymentMethod = paymentMethod;
+    }
+    
+    public void setProductionDuration(int productionDuration){
+        this.productionDuration = productionDuration;
+    }
     public DefaultTableModel getTableModel(){
         return tableModel;
     }
@@ -62,7 +81,7 @@ public class Transaction extends DatabaseConnection {
     public void addDataTransaction(){
         try{
             getDatabaseConnection();
-            query = "INSERT INTO tb_transaction (product, costumer, price, qty, total_payment, address)VALUES (?, ?, ?, ?, ?, ?)";
+            query = "INSERT INTO tb_transaction (product, costumer, price, qty, total_payment, address,  greetings, payment_method, production_duration)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, product);
             statement.setInt(2, costumer);
@@ -70,6 +89,9 @@ public class Transaction extends DatabaseConnection {
             statement.setInt(4, qty);
             statement.setInt(5, totalPayment);
             statement.setString(6, address);
+            statement.setString(7, greetings);
+            statement.setString(8, paymentMethod);
+            statement.setInt(9, productionDuration);
             statement.executeUpdate();
             connection.close();
             clean();
@@ -87,11 +109,14 @@ public class Transaction extends DatabaseConnection {
             tableModel.addColumn("ID ORDER");
             tableModel.addColumn("DATE");
             tableModel.addColumn("PRODUCT");
+            tableModel.addColumn("QTY");
+            tableModel.addColumn("TOTAL PAYMENT");
+            tableModel.addColumn("PRODUCTION DURATION");
             tableModel.addColumn("STATUS");
         }
         try{
             getDatabaseConnection();
-            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.status FROM tb_transaction\n" +
+            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.qty,tb_transaction.total_payment,tb_transaction.production_duration,tb_transaction.status FROM tb_transaction\n" +
                     "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
                     "WHERE tb_transaction.costumer=?\n" +
                     "ORDER BY id ASC;";
@@ -103,6 +128,9 @@ public class Transaction extends DatabaseConnection {
                     result.getInt("id"),
                     result.getString("date"),
                     result.getString("name"),
+                    result.getInt("qty"),
+                    result.getInt("total_payment"),
+                    result.getInt("qty"),
                     result.getString("status")
                 });
             }
@@ -112,20 +140,22 @@ public class Transaction extends DatabaseConnection {
         }
     }
     
-    public void getAllDataOrderedTransaction(){
+    public void getAllDataTransaction(){
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
         if (tableModel.getColumnCount() == 0){
             tableModel.addColumn("ID ORDER");
             tableModel.addColumn("DATE");
             tableModel.addColumn("PRODUCT");
+            tableModel.addColumn("QTY");
+            tableModel.addColumn("TOTAL PAYMENT");
+            tableModel.addColumn("PRODUCTION DURATION");
             tableModel.addColumn("STATUS");
         }
         try{
             getDatabaseConnection();
-            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.status FROM tb_transaction\n" +
+            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.qty,tb_transaction.total_payment,tb_transaction.production_duration,tb_transaction.status FROM tb_transaction\n" +
                     "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
-                    "WHERE tb_transaction.status='ORDERED'\n" +
                     "ORDER BY id ASC;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet result = statement.executeQuery();
@@ -134,104 +164,52 @@ public class Transaction extends DatabaseConnection {
                     result.getInt("id"),
                     result.getString("date"),
                     result.getString("name"),
+                    result.getInt("qty"),
+                    result.getInt("total_payment"),
+                    result.getInt("qty"),
                     result.getString("status")
                 });
             }
         } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Get Data Ordered Error");
+            JOptionPane.showMessageDialog(null,"Get All Data Transaction Error");
             System.out.println(e.getMessage());
         }
     }
     
-    public void getAllDataDeliveredTransaction(){
+    public void getAllDataTransactionByStatus(){
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
         if (tableModel.getColumnCount() == 0){
             tableModel.addColumn("ID ORDER");
             tableModel.addColumn("DATE");
             tableModel.addColumn("PRODUCT");
+            tableModel.addColumn("QTY");
+            tableModel.addColumn("TOTAL PAYMENT");
+            tableModel.addColumn("PRODUCTION DURATION");
             tableModel.addColumn("STATUS");
         }
         try{
             getDatabaseConnection();
-            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.status FROM tb_transaction\n" +
+            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.qty,tb_transaction.total_payment,tb_transaction.production_duration,tb_transaction.status FROM tb_transaction\n" +
                     "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
-                    "WHERE tb_transaction.status='DELIVERY'\n" +
+                    "WHERE tb_transaction.status=?\n" +
                     "ORDER BY id ASC;";
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, status);
             ResultSet result = statement.executeQuery();
             while(result.next()){
                 tableModel.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("date"),
                     result.getString("name"),
+                    result.getInt("qty"),
+                    result.getInt("total_payment"),
+                    result.getInt("qty"),
                     result.getString("status")
                 });
             }
         } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Get Data Delivery Error");
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void getAllDataSuccessTransaction(){
-        tableModel.getDataVector().removeAllElements();
-        tableModel.fireTableDataChanged();
-        if (tableModel.getColumnCount() == 0){
-            tableModel.addColumn("ID ORDER");
-            tableModel.addColumn("DATE");
-            tableModel.addColumn("PRODUCT");
-            tableModel.addColumn("STATUS");
-        }
-        try{
-            getDatabaseConnection();
-            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.status FROM tb_transaction\n" +
-                    "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
-                    "WHERE tb_transaction.status='SUCCESS'\n" +
-                    "ORDER BY id ASC;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet result = statement.executeQuery();
-            while(result.next()){
-                tableModel.addRow(new Object[]{
-                    result.getInt("id"),
-                    result.getString("date"),
-                    result.getString("name"),
-                    result.getString("status")
-                });
-            }
-        } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Get Data Delivery Error");
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void getAllDataCancelTransaction(){
-        tableModel.getDataVector().removeAllElements();
-        tableModel.fireTableDataChanged();
-        if (tableModel.getColumnCount() == 0){
-            tableModel.addColumn("ID ORDER");
-            tableModel.addColumn("DATE");
-            tableModel.addColumn("PRODUCT");
-            tableModel.addColumn("STATUS");
-        }
-        try{
-            getDatabaseConnection();
-            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.status FROM tb_transaction\n" +
-                    "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
-                    "WHERE tb_transaction.status='CANCEL'\n" +
-                    "ORDER BY id ASC;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet result = statement.executeQuery();
-            while(result.next()){
-                tableModel.addRow(new Object[]{
-                    result.getInt("id"),
-                    result.getString("date"),
-                    result.getString("name"),
-                    result.getString("status")
-                });
-            }
-        } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Get Data Cancel Error");
+            JOptionPane.showMessageDialog(null,"Get All Data Transaction By Status Error");
             System.out.println(e.getMessage());
         }
     }
@@ -248,6 +226,22 @@ public class Transaction extends DatabaseConnection {
             clean();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Status Update Error");
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updateNoteTransaction(){
+        try{
+            getDatabaseConnection();
+            query = "UPDATE tb_transaction SET note=? WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, note);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+            connection.close();
+            clean();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Note Update Error");
             System.out.println(e.getMessage());
         }
     }

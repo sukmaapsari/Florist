@@ -15,6 +15,11 @@ public class DetailTransaction extends DatabaseConnection {
     String phoneNumber;
     String address;
     int totalPayment;
+    String greetings;
+    String paymentMethod;
+    int productionDuration;
+    String status;
+    String note;
     
     public void setId(int id){
         this.id = id;
@@ -48,11 +53,31 @@ public class DetailTransaction extends DatabaseConnection {
         return address;
     }
     
+    public String getGreetings(){
+        return greetings;
+    }
+    
+    public String getPaymentMethod(){
+        return paymentMethod;
+    }
+    
+    public int getProductionDuration(){
+        return productionDuration;
+    }
+    
+        public String getStatus(){
+        return status;
+    }
+    
+    public String getNote(){
+        return note;
+    }
+    
     
     public void getDetailTransaction(){
         try{
             getDatabaseConnection();
-            String query = "SELECT tb_product.name AS product,tb_transaction.qty,tb_product.price,tb_user.name AS costumer,tb_user.phone_number,tb_transaction.address,tb_transaction.total_payment FROM tb_transaction\n" +
+            String query = "SELECT tb_product.name AS product,tb_transaction.qty,tb_transaction.price,tb_transaction.greetings,tb_transaction.production_duration,tb_user.name AS costumer,tb_user.phone_number,tb_transaction.address,tb_transaction.total_payment,tb_transaction.payment_method,tb_transaction.status,tb_transaction.note FROM tb_transaction\n" +
                            "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
                            "INNER JOIN tb_user ON tb_transaction.costumer=tb_user.id\n" +
                            "WHERE tb_transaction.id=?;";
@@ -63,10 +88,15 @@ public class DetailTransaction extends DatabaseConnection {
                 product = result.getString("product");
                 qty = result.getInt("qty");
                 price = result.getInt("price");
+                greetings = result.getString("greetings");
+                productionDuration = result.getInt("production_duration");
                 costumer = result.getString("costumer");
                 address = result.getString("address");
                 phoneNumber = result.getString("phone_number");
-                totalPayment = result.getInt("total_payment");     
+                totalPayment = result.getInt("total_payment");
+                paymentMethod = result.getString("payment_method");
+                status = result.getString("status");
+                note = result.getString("note");
             } else {
                 System.out.println("Transaction not Found");
             }

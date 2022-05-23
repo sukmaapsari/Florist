@@ -4,6 +4,7 @@ import florist.connection.DatabaseConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,14 +19,17 @@ public class Report extends DatabaseConnection{
     String phoneNumber;
     String address;
     int totalPayment;
-    int incomeReport;
-    int cancelTransactionReport;
-    int orderTransactionReport;
-    int deliveryTransactionReport;
-    int successTransactionReport;
-    
-    
+    String greetings;
+    String paymentMethod;
+    int productionDuration;
+    String status;
+    String note;
+
     public void setId(int id){
+        this.id = id;
+    }
+    
+    public void setStatus(int id){
         this.id = id;
     }
     
@@ -57,31 +61,31 @@ public class Report extends DatabaseConnection{
         return address;
     }
     
+    public String getGreetings(){
+        return greetings;
+    }
+    
+    public String getPaymentMethod(){
+        return paymentMethod;
+    }
+    
+    public int getProductionDuration(){
+        return productionDuration;
+    }
+    
+    public String getStatus(){
+        return status;
+    }
+    
+    public String getNote(){
+        return note;
+    }
     public DefaultTableModel getTableModel(){
         return tableModel;
     }
     
     public int getIncomeReport(){
-        return incomeReport;
-    }
-    
-    public int getCancelTransactionReport(){
-        return cancelTransactionReport;
-    }
-    
-    public int getSuccessTransactionReport(){
-        return successTransactionReport;
-    }
-    
-    public int getDeliveryTransactionReport(){
-        return deliveryTransactionReport;
-    }
-    
-    public int getOrderTransactionReport(){
-        return orderTransactionReport;
-    }
-    
-    public void setIncome(){
+        int incomeReport = 0;
         try{
             getDatabaseConnection();
             query = "SELECT SUM(total_payment) AS income FROM tb_transaction WHERE tb_transaction.status='SUCCESS';";
@@ -96,16 +100,83 @@ public class Report extends DatabaseConnection{
             JOptionPane.showMessageDialog(null,"Get Income Error");
             System.out.println(e.getMessage());
         }
+        return incomeReport;
     }
     
-    public void setSuccessTransactionReport(){
+    public int getIncomeReportByMonth(int month){
+        int incomeReport = 0;
         try{
             getDatabaseConnection();
-            query = "SELECT COUNT(*) AS transaction_success FROM tb_transaction WHERE tb_transaction.status='SUCCESS';";
+            query = "SELECT SUM(total_payment) AS income FROM tb_transaction \n" +
+                    "WHERE tb_transaction.status='SUCCESS' && MONTH(tb_transaction.date)=?";
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, month);
             ResultSet result = statement.executeQuery();
             if (result.next()){
-                successTransactionReport = result.getInt("transaction_success");   
+                incomeReport = result.getInt("income");   
+            } else {
+                System.out.println("Income not Found");
+            }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Get Income Error");
+            System.out.println(e.getMessage());
+        }
+        return incomeReport;
+    }
+    
+    public int getIncomeReportByYear(int year){
+        int incomeReport = 0;
+        try{
+            getDatabaseConnection();
+            query = "SELECT SUM(total_payment) AS income FROM tb_transaction \n" +
+                    "WHERE tb_transaction.status='SUCCESS' && YEAR(tb_transaction.date)=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, year);
+            ResultSet result = statement.executeQuery();
+            if (result.next()){
+                incomeReport = result.getInt("income");   
+            } else {
+                System.out.println("Income not Found");
+            }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Get Income Error");
+            System.out.println(e.getMessage());
+        }
+        return incomeReport;
+    }
+    
+    public int getIncomeReportByMonthAndYear(int month, int year){
+        int incomeReport = 0;
+        try{
+            getDatabaseConnection();
+            query = "SELECT SUM(total_payment) AS income FROM tb_transaction \n" +
+                    "WHERE tb_transaction.status='SUCCESS' && MONTH(tb_transaction.date)=? && YEAR(tb_transaction.date)=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, month);
+            statement.setInt(2, year);
+            ResultSet result = statement.executeQuery();
+            if (result.next()){
+                incomeReport = result.getInt("income");   
+            } else {
+                System.out.println("Income not Found");
+            }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Get Income Error");
+            System.out.println(e.getMessage());
+        }
+        return incomeReport;
+    }
+    
+    public int getTransactionReport(String status){
+        int transactionReport = 0;
+        try{
+            getDatabaseConnection();
+            query = "SELECT COUNT(*) AS transaction_success FROM tb_transaction WHERE tb_transaction.status=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, status);
+            ResultSet result = statement.executeQuery();
+            if (result.next()){
+                transactionReport = result.getInt("transaction_success");   
             } else {
                 System.out.println("Transaction Success not Found");
             }
@@ -113,72 +184,110 @@ public class Report extends DatabaseConnection{
             JOptionPane.showMessageDialog(null,"Get Transaction Success Error");
             System.out.println(e.getMessage());
         }
+        return transactionReport;
     }
     
-    public void setCancelTransactionReport(){
+    public int getTransactionReportByMonth(String status, int month){
+        int transactionReport = 0;
         try{
             getDatabaseConnection();
-            query = "SELECT COUNT(*) AS transaction_cancel FROM tb_transaction WHERE tb_transaction.status='CANCEL';";
+            query = "SELECT COUNT(*) AS transaction_success FROM tb_transaction\n" +
+                    "WHERE tb_transaction.status=? && MONTH(tb_transaction.date)=?";
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, status);
+            statement.setInt(2, month);
             ResultSet result = statement.executeQuery();
             if (result.next()){
-                cancelTransactionReport = result.getInt("transaction_cancel");   
+                transactionReport = result.getInt("transaction_success");   
             } else {
-                System.out.println("Transaction Cancel not Found");
+                System.out.println("Transaction Success not Found");
             }
         } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Get Transaction Cancel Error");
+            JOptionPane.showMessageDialog(null,"Get Transaction Success Error");
             System.out.println(e.getMessage());
         }
+        return transactionReport;
     }
     
-    public void setDeliveryTransactionReport(){
+    public int getTransactionReportByYear(String status, int year){
+        int transactionReport = 0;
         try{
             getDatabaseConnection();
-            query = "SELECT COUNT(*) AS transaction_delivery FROM tb_transaction WHERE tb_transaction.status='DELIVERY';";
+            query = "SELECT COUNT(*) AS transaction_success FROM tb_transaction\n" +
+                    "WHERE tb_transaction.status=? && YEAR(tb_transaction.date)=?";
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, status);
+            statement.setInt(2, year);
             ResultSet result = statement.executeQuery();
             if (result.next()){
-                deliveryTransactionReport = result.getInt("transaction_delivery");   
+                transactionReport = result.getInt("transaction_success");   
             } else {
-                System.out.println("Transaction Delivery not Found");
+                System.out.println("Transaction Success not Found");
             }
         } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Get Transaction Delivery Error");
+            JOptionPane.showMessageDialog(null,"Get Transaction Success Error");
             System.out.println(e.getMessage());
         }
+        return transactionReport;
     }
     
-    public void setOrderTransactionReport(){
+    public int getTransactionReportByMonthAndYear(String status, int month, int year){
+        int transactionReport = 0;
         try{
             getDatabaseConnection();
-            query = "SELECT COUNT(*) AS transaction_order FROM tb_transaction WHERE tb_transaction.status='ORDERED';";
+            query = "SELECT COUNT(*) AS transaction_success FROM tb_transaction\n" +
+                    "WHERE tb_transaction.status=? && MONTH(tb_transaction.date)=? && YEAR(tb_transaction.date)=?";
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, status);
+            statement.setInt(2, month);
+            statement.setInt(3, year);
             ResultSet result = statement.executeQuery();
             if (result.next()){
-                orderTransactionReport = result.getInt("transaction_order");   
+                transactionReport = result.getInt("transaction_success");   
             } else {
-                System.out.println("Transaction Order not Found");
+                System.out.println("Transaction Success not Found");
             }
         } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Get Transaction Order Error");
+            JOptionPane.showMessageDialog(null,"Get Transaction Success Error");
             System.out.println(e.getMessage());
         }
+        return transactionReport;
+    }
+    
+    public ArrayList<Integer> getListYear(){
+        ArrayList<Integer> listYear = new ArrayList<>();
+        try{
+            getDatabaseConnection();
+            query = "SELECT YEAR(tb_transaction.date) AS data_year FROM tb_transaction\n"
+                    + "GROUP BY YEAR(tb_transaction.date);";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+            while(result.next()){
+                listYear.add(result.getInt("data_year"));
+            }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Get Year Error");
+            System.out.println(e.getMessage());
+        }
+        return listYear;
     }
     
     public void getAllDataTransaction(){
         tableModel.getDataVector().removeAllElements();
         tableModel.fireTableDataChanged();
-        System.out.println("test");
         if (tableModel.getColumnCount() == 0){
             tableModel.addColumn("ID ORDER");
             tableModel.addColumn("DATE");
-            tableModel.addColumn("TOTAL");
+            tableModel.addColumn("PRODUCT");
+            tableModel.addColumn("QTY");
+            tableModel.addColumn("TOTAL PAYMENT");
+            tableModel.addColumn("PRODUCTION DURATION");
             tableModel.addColumn("STATUS");
         }
         try{
             getDatabaseConnection();
-            query = "SELECT * FROM tb_transaction\n" +
+            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.qty,tb_transaction.total_payment,tb_transaction.production_duration,tb_transaction.status FROM tb_transaction\n" +
+                    "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
                     "ORDER BY id ASC;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet result = statement.executeQuery();
@@ -186,12 +295,130 @@ public class Report extends DatabaseConnection{
                 tableModel.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("date"),
+                    result.getString("name"),
+                    result.getInt("qty"),
                     result.getInt("total_payment"),
+                    result.getInt("qty"),
                     result.getString("status")
                 });
             }
         } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Get Data Transaction Error");
+            JOptionPane.showMessageDialog(null,"Get All Data Transaction Error");
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void getAllDataTransactionByYear(int year){
+        tableModel.getDataVector().removeAllElements();
+        tableModel.fireTableDataChanged();
+        if (tableModel.getColumnCount() == 0){
+            tableModel.addColumn("ID ORDER");
+            tableModel.addColumn("DATE");
+            tableModel.addColumn("PRODUCT");
+            tableModel.addColumn("QTY");
+            tableModel.addColumn("TOTAL PAYMENT");
+            tableModel.addColumn("PRODUCTION DURATION");
+            tableModel.addColumn("STATUS");
+        }
+        try{
+            getDatabaseConnection();
+            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.qty,tb_transaction.total_payment,tb_transaction.production_duration,tb_transaction.status FROM tb_transaction\n" +
+                    "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
+                    "WHERE YEAR(tb_transaction.date)=?\n" +
+                    "ORDER BY id ASC;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, year);
+            ResultSet result = statement.executeQuery();
+            while(result.next()){
+                tableModel.addRow(new Object[]{
+                    result.getInt("id"),
+                    result.getString("date"),
+                    result.getString("name"),
+                    result.getInt("qty"),
+                    result.getInt("total_payment"),
+                    result.getInt("qty"),
+                    result.getString("status")
+                });
+            }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Get All Data Transaction By Year Error");
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void getAllDataTransactionByMonth(int month){
+        tableModel.getDataVector().removeAllElements();
+        tableModel.fireTableDataChanged();
+        if (tableModel.getColumnCount() == 0){
+            tableModel.addColumn("ID ORDER");
+            tableModel.addColumn("DATE");
+            tableModel.addColumn("PRODUCT");
+            tableModel.addColumn("QTY");
+            tableModel.addColumn("TOTAL PAYMENT");
+            tableModel.addColumn("PRODUCTION DURATION");
+            tableModel.addColumn("STATUS");
+        }
+        try{
+            getDatabaseConnection();
+            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.qty,tb_transaction.total_payment,tb_transaction.production_duration,tb_transaction.status FROM tb_transaction\n" +
+                    "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
+                    "WHERE MONTH(tb_transaction.date)=?\n" +
+                    "ORDER BY id ASC;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, month);
+            ResultSet result = statement.executeQuery();
+            while(result.next()){
+                tableModel.addRow(new Object[]{
+                    result.getInt("id"),
+                    result.getString("date"),
+                    result.getString("name"),
+                    result.getInt("qty"),
+                    result.getInt("total_payment"),
+                    result.getInt("qty"),
+                    result.getString("status")
+                });
+            }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Get All Data Transaction By MonthError");
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void getAllDataTransactionByMonthAndYear(int month, int year){
+        tableModel.getDataVector().removeAllElements();
+        tableModel.fireTableDataChanged();
+        if (tableModel.getColumnCount() == 0){
+            tableModel.addColumn("ID ORDER");
+            tableModel.addColumn("DATE");
+            tableModel.addColumn("PRODUCT");
+            tableModel.addColumn("QTY");
+            tableModel.addColumn("TOTAL PAYMENT");
+            tableModel.addColumn("PRODUCTION DURATION");
+            tableModel.addColumn("STATUS");
+        }
+        try{
+            getDatabaseConnection();
+            query = "SELECT tb_transaction.id,tb_transaction.date,tb_product.name,tb_transaction.qty,tb_transaction.total_payment,tb_transaction.production_duration,tb_transaction.status FROM tb_transaction\n" +
+                    "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
+                    "WHERE YEAR(tb_transaction.date)=? && MONTH(tb_transaction.date)=?\n" +
+                    "ORDER BY id ASC;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, year);
+            statement.setInt(2, month);
+            ResultSet result = statement.executeQuery();
+            while(result.next()){
+                tableModel.addRow(new Object[]{
+                    result.getInt("id"),
+                    result.getString("date"),
+                    result.getString("name"),
+                    result.getInt("qty"),
+                    result.getInt("total_payment"),
+                    result.getInt("qty"),
+                    result.getString("status")
+                });
+            }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Get All Data Transaction By Month And Year Error");
             System.out.println(e.getMessage());
         }
     }
@@ -199,7 +426,7 @@ public class Report extends DatabaseConnection{
     public void getDetailTransaction(){
         try{
             getDatabaseConnection();
-            String query = "SELECT tb_product.name AS product,tb_transaction.qty,tb_product.price,tb_user.name AS costumer,tb_user.phone_number,tb_transaction.address,tb_transaction.total_payment FROM tb_transaction\n" +
+            String query = "SELECT tb_product.name AS product,tb_transaction.qty,tb_transaction.price,tb_transaction.greetings,tb_transaction.production_duration,tb_user.name AS costumer,tb_user.phone_number,tb_transaction.address,tb_transaction.total_payment,tb_transaction.payment_method,tb_transaction.status,tb_transaction.note FROM tb_transaction\n" +
                            "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
                            "INNER JOIN tb_user ON tb_transaction.costumer=tb_user.id\n" +
                            "WHERE tb_transaction.id=?;";
@@ -210,10 +437,15 @@ public class Report extends DatabaseConnection{
                 product = result.getString("product");
                 qty = result.getInt("qty");
                 price = result.getInt("price");
+                greetings = result.getString("greetings");
+                productionDuration = result.getInt("production_duration");
                 costumer = result.getString("costumer");
                 address = result.getString("address");
                 phoneNumber = result.getString("phone_number");
-                totalPayment = result.getInt("total_payment");     
+                totalPayment = result.getInt("total_payment");
+                paymentMethod = result.getString("payment_method");
+                status = result.getString("status");
+                note = result.getString("note");
             } else {
                 System.out.println("Transaction not Found");
             }

@@ -89,7 +89,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="760" y="180" width="200" height="280"/>
+              <AbsoluteConstraints x="760" y="180" width="200" height="250"/>
             </Constraint>
           </Constraints>
 
@@ -98,14 +98,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="productName3" alignment="0" pref="169" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="productPrice3" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="productStock3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="productName3" min="-2" pref="169" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -120,11 +113,6 @@
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="productName3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="productPrice3" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="productStock3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -136,30 +124,14 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SansSerif" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Name Bouqet"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="productPrice3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Rp.99.999"/>
+                <Property name="text" type="java.lang.String" value="Table Flower"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/florist/resource/liliy-01.png"/>
+                  <Image iconType="3" name="/florist/resource/bunga_meja-01.png"/>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="productStock3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="stock"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -170,7 +142,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="540" y="180" width="-1" height="-1"/>
+              <AbsoluteConstraints x="540" y="180" width="-1" height="250"/>
             </Constraint>
           </Constraints>
 
@@ -179,14 +151,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="productName2" alignment="0" pref="169" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="productPrice2" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="productStock2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="productName2" min="-2" pref="169" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -201,11 +166,6 @@
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="productName2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="productPrice2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="productStock2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -217,30 +177,14 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SansSerif" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Name Bouqet"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="productPrice2">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Rp.99.999"/>
+                <Property name="text" type="java.lang.String" value="Wreaths"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/florist/resource/sun-01-01-01-01.png"/>
+                  <Image iconType="3" name="/florist/resource/karangan_bunga-01.png"/>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="productStock2">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="stock"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -251,7 +195,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="320" y="180" width="200" height="280"/>
+              <AbsoluteConstraints x="320" y="180" width="200" height="250"/>
             </Constraint>
           </Constraints>
 
@@ -260,14 +204,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="productName1" pref="169" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="productPrice1" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="productStock1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="productName1" min="-2" pref="169" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -282,11 +219,6 @@
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="productName1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="productPrice1" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="productStock1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -298,15 +230,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SansSerif" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Name Bouqet"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="productPrice1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Rp.99.999"/>
+                <Property name="text" type="java.lang.String" value="Bouqet"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -314,14 +238,6 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/florist/resource/mawar-01.png"/>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="productStock1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="stock"/>
               </Properties>
             </Component>
           </SubComponents>

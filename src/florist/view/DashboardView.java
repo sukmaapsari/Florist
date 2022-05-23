@@ -1,63 +1,14 @@
 package florist.view;
 
-import florist.model.Product;
-import java.text.NumberFormat;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 
 public class DashboardView extends javax.swing.JFrame {
 
-    Product product = new Product();
     int currentUserId;
     
     public DashboardView(int id) {
         initComponents();
         currentUserId = id;
-        getProduct1();
-        getProduct2();
-        getProduct3();
-    }
-    
-    private void getProduct1(){
-        int id = 1;
-        product.setId(id);
-        product.getProduct();
-        
-        String productName = product.getName();
-        String stock = String.valueOf(product.getStock());
-        NumberFormat currency = NumberFormat.getCurrencyInstance(new Locale("in", "ID"));
-        String price = currency.format(product.getPrice());
-        productName1.setText(productName);
-        productPrice1.setText(price);
-        productStock1.setText(stock);   
-    }
-    
-    private void getProduct2(){
-        int id = 2;
-        product.setId(id);
-        product.getProduct();
-        
-        String productName = product.getName();
-        String stock = String.valueOf(product.getStock());
-        NumberFormat currency = NumberFormat.getCurrencyInstance(new Locale("in", "ID"));
-        String price = currency.format(product.getPrice());
-        productName2.setText(productName);
-        productPrice2.setText(price);
-        productStock2.setText(stock);
-    }
-    
-    private void getProduct3(){
-        int id = 3;
-        product.setId(id);
-        product.getProduct();
-        
-        String productName = product.getName();
-        String stock = String.valueOf(product.getStock());
-        NumberFormat currency = NumberFormat.getCurrencyInstance(new Locale("in", "ID"));
-        String price = currency.format(product.getPrice());
-        productName3.setText(productName);
-        productPrice3.setText(price);
-        productStock3.setText(stock);
     }
 
     @SuppressWarnings("unchecked")
@@ -69,19 +20,13 @@ public class DashboardView extends javax.swing.JFrame {
         buttonOrderStatus = new javax.swing.JButton();
         lilyPanel = new javax.swing.JPanel();
         productName3 = new javax.swing.JLabel();
-        productPrice3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        productStock3 = new javax.swing.JLabel();
         sunPanel = new javax.swing.JPanel();
         productName2 = new javax.swing.JLabel();
-        productPrice2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        productStock2 = new javax.swing.JLabel();
         rosePanel = new javax.swing.JPanel();
         productName1 = new javax.swing.JLabel();
-        productPrice1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        productStock1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -122,15 +67,9 @@ public class DashboardView extends javax.swing.JFrame {
         });
 
         productName3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        productName3.setText("Name Bouqet");
+        productName3.setText("Table Flower");
 
-        productPrice3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        productPrice3.setText("Rp.99.999");
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/florist/resource/liliy-01.png"))); // NOI18N
-
-        productStock3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        productStock3.setText("stock");
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/florist/resource/bunga_meja-01.png"))); // NOI18N
 
         javax.swing.GroupLayout lilyPanelLayout = new javax.swing.GroupLayout(lilyPanel);
         lilyPanel.setLayout(lilyPanelLayout);
@@ -138,12 +77,7 @@ public class DashboardView extends javax.swing.JFrame {
             lilyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lilyPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(lilyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(productName3, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addGroup(lilyPanelLayout.createSequentialGroup()
-                        .addComponent(productPrice3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(productStock3)))
+                .addComponent(productName3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(lilyPanelLayout.createSequentialGroup()
                 .addComponent(jLabel9)
@@ -155,15 +89,11 @@ public class DashboardView extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(productName3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(lilyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productPrice3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(productStock3))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel1.add(lilyPanel);
-        lilyPanel.setBounds(760, 180, 200, 280);
+        lilyPanel.setBounds(760, 180, 200, 250);
 
         sunPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -172,15 +102,9 @@ public class DashboardView extends javax.swing.JFrame {
         });
 
         productName2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        productName2.setText("Name Bouqet");
+        productName2.setText("Wreaths");
 
-        productPrice2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        productPrice2.setText("Rp.99.999");
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/florist/resource/sun-01-01-01-01.png"))); // NOI18N
-
-        productStock2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        productStock2.setText("stock");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/florist/resource/karangan_bunga-01.png"))); // NOI18N
 
         javax.swing.GroupLayout sunPanelLayout = new javax.swing.GroupLayout(sunPanel);
         sunPanel.setLayout(sunPanelLayout);
@@ -188,12 +112,7 @@ public class DashboardView extends javax.swing.JFrame {
             sunPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sunPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(sunPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(productName2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addGroup(sunPanelLayout.createSequentialGroup()
-                        .addComponent(productPrice2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(productStock2)))
+                .addComponent(productName2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(sunPanelLayout.createSequentialGroup()
                 .addComponent(jLabel7)
@@ -205,15 +124,11 @@ public class DashboardView extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(productName2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(sunPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productPrice2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(productStock2))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel1.add(sunPanel);
-        sunPanel.setBounds(540, 180, 200, 280);
+        sunPanel.setBounds(540, 180, 200, 250);
 
         rosePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -222,15 +137,9 @@ public class DashboardView extends javax.swing.JFrame {
         });
 
         productName1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        productName1.setText("Name Bouqet");
-
-        productPrice1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        productPrice1.setText("Rp.99.999");
+        productName1.setText("Bouqet");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/florist/resource/mawar-01.png"))); // NOI18N
-
-        productStock1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        productStock1.setText("stock");
 
         javax.swing.GroupLayout rosePanelLayout = new javax.swing.GroupLayout(rosePanel);
         rosePanel.setLayout(rosePanelLayout);
@@ -238,12 +147,7 @@ public class DashboardView extends javax.swing.JFrame {
             rosePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rosePanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(rosePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(productName1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addGroup(rosePanelLayout.createSequentialGroup()
-                        .addComponent(productPrice1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(productStock1)))
+                .addComponent(productName1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(rosePanelLayout.createSequentialGroup()
                 .addComponent(jLabel4)
@@ -255,15 +159,11 @@ public class DashboardView extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(productName1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(rosePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(productStock1))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel1.add(rosePanel);
-        rosePanel.setBounds(320, 180, 200, 280);
+        rosePanel.setBounds(320, 180, 200, 250);
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         jLabel5.setText("FLORIST");
@@ -381,12 +281,6 @@ public class DashboardView extends javax.swing.JFrame {
     private javax.swing.JLabel productName1;
     private javax.swing.JLabel productName2;
     private javax.swing.JLabel productName3;
-    private javax.swing.JLabel productPrice1;
-    private javax.swing.JLabel productPrice2;
-    private javax.swing.JLabel productPrice3;
-    private javax.swing.JLabel productStock1;
-    private javax.swing.JLabel productStock2;
-    private javax.swing.JLabel productStock3;
     private javax.swing.JPanel rosePanel;
     private javax.swing.JPanel sunPanel;
     // End of variables declaration//GEN-END:variables

@@ -17,8 +17,7 @@ public class Florist {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // menghubungkan main dengan view Sign in
-        SignInView loginView = new SignInView(); // buat object baru
+        SignInView loginView = new SignInView();
         loginView.setVisible(true);
     }
     
