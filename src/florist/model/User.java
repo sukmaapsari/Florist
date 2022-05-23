@@ -59,6 +59,14 @@ public class User extends DatabaseConnection{
         return role;
     }
     
+    public String getPassword(){
+        return password;
+    }
+    
+    public String getUsername(){
+        return username;
+    }
+    
     public void signIn(){
         try{
             getDatabaseConnection();
@@ -72,7 +80,9 @@ public class User extends DatabaseConnection{
                 name = result.getString("name");
                 address = result.getString("address");
                 phoneNumber = result.getString("phone_number");
-                role = result.getInt("role");     
+                role = result.getInt("role");
+                password = result.getString("password");
+                username = result.getString("username");
             } else {
                 System.out.println("User not Found");
             } 

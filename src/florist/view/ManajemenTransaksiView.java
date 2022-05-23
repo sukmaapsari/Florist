@@ -638,7 +638,7 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
             case "COD":
             paymentMethod = "CASH ON DELIVERY";
             switch (status) {
-                case "RECIEVED":
+                case "SUCCESS":
                     textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
                     break;
                 case "CANCEL":

@@ -130,7 +130,7 @@ public class Transaction extends DatabaseConnection {
                     result.getString("name"),
                     result.getInt("qty"),
                     result.getInt("total_payment"),
-                    result.getInt("qty"),
+                    result.getInt("production_duration"),
                     result.getString("status")
                 });
             }
@@ -166,7 +166,7 @@ public class Transaction extends DatabaseConnection {
                     result.getString("name"),
                     result.getInt("qty"),
                     result.getInt("total_payment"),
-                    result.getInt("qty"),
+                    result.getInt("production_duration"),
                     result.getString("status")
                 });
             }
@@ -204,7 +204,7 @@ public class Transaction extends DatabaseConnection {
                     result.getString("name"),
                     result.getInt("qty"),
                     result.getInt("total_payment"),
-                    result.getInt("qty"),
+                    result.getInt("production_duration"),
                     result.getString("status")
                 });
             }

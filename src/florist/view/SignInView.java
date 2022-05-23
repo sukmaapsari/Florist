@@ -174,7 +174,9 @@ public class SignInView extends javax.swing.JFrame {
             user.setPassword(password);
             user.signIn();
             int id = user.getId();
-            if (id <= 0){
+            String userPassword = user.getPassword();
+            String userUsername = user.getUsername();
+            if (id <= 0 || userPassword.equals(textPassword.getText())== false || userUsername.equals(textUsername.getText())== false){
                 JOptionPane.showMessageDialog(rootPane, "User not found! Make Sure your username and password is correct");
                 textPassword.setText("");
                 textUsername.requestFocus();

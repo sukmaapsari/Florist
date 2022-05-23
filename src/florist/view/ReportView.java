@@ -352,8 +352,8 @@ public class ReportView extends javax.swing.JFrame {
         jScrollPane6.setViewportView(textGreetings);
 
         buttonSearch.setBackground(new java.awt.Color(255, 153, 153));
-        buttonSearch.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        buttonSearch.setText("Serach");
+        buttonSearch.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        buttonSearch.setText("SEARCH");
         buttonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSearchActionPerformed(evt);
@@ -407,6 +407,11 @@ public class ReportView extends javax.swing.JFrame {
 
         comboBoxMonth.setBackground(new java.awt.Color(255, 153, 153));
         comboBoxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" }));
+        comboBoxMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxMonthActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -608,7 +613,7 @@ public class ReportView extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(textTotalPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel12)))))
-                        .addContainerGap(90, Short.MAX_VALUE))))
+                        .addContainerGap(83, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -759,6 +764,10 @@ public class ReportView extends javax.swing.JFrame {
     private void textProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textProductNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textProductNameActionPerformed
+
+    private void comboBoxMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMonthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxMonthActionPerformed
 
     /**
      * @param args the command line arguments

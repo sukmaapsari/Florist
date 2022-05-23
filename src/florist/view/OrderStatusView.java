@@ -465,14 +465,14 @@ public class OrderStatusView extends javax.swing.JFrame {
             int row = tableTransaction.getSelectedRow();
             int idTransaction = (int) tableModel.getValueAt(row, 0);
             transaction.setId(idTransaction);
-            transaction.setStatus("RECIEVED");
+            transaction.setStatus("SUCCESS");
             transaction.updateStatusTransaction();
             
             getTableDataTransaction();
 
             buttonRecieved.setVisible(false);
             buttonCancel.setVisible(false);
-            textStatus.setText("RECIEVED");
+            textStatus.setText("SUCCESS");
             clean();
         }
     }//GEN-LAST:event_buttonRecievedActionPerformed
@@ -561,7 +561,7 @@ public class OrderStatusView extends javax.swing.JFrame {
             case "COD":
             paymentMethod = "CASH ON DELIVERY";
             switch (status) {
-                case "RECIEVED":
+                case "SUCCESS":
                     textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
                     break;
                 case "CANCEL":
