@@ -21,6 +21,7 @@ public class Transaction extends DatabaseConnection {
     String paymentMethod;
     String note;
     int productionDuration;
+    String evidence;
     DefaultTableModel tableModel = new DefaultTableModel();
     
     public void setId(int id){
@@ -74,6 +75,11 @@ public class Transaction extends DatabaseConnection {
     public void setProductionDuration(int productionDuration){
         this.productionDuration = productionDuration;
     }
+    
+    public void setEvidence(String evidence){
+        this.evidence = evidence;
+    }
+    
     public DefaultTableModel getTableModel(){
         return tableModel;
     }
@@ -242,6 +248,22 @@ public class Transaction extends DatabaseConnection {
             clean();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Note Update Error");
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updateEvidenceTransaction(){
+        try{
+            getDatabaseConnection();
+            query = "UPDATE tb_transaction SET evidence=? WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, evidence);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+            connection.close();
+            clean();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Evidence Update Error");
             System.out.println(e.getMessage());
         }
     }

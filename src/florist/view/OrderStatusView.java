@@ -13,12 +13,15 @@ public class OrderStatusView extends javax.swing.JFrame {
     DetailTransaction detailTransaction = new DetailTransaction();
     DefaultTableModel tableModel = new DefaultTableModel();
     int currentUserId;
+    String evidence = "";
     
     public OrderStatusView(int id) {
         initComponents();
         currentUserId = id;
         getTableDataTransaction();
         clean();
+        buttonUploadEvidence.setVisible(false);
+        buttonViewEvidence.setVisible(false);
     }
 
     private void getTableDataTransaction(){
@@ -46,6 +49,8 @@ public class OrderStatusView extends javax.swing.JFrame {
        
         buttonRecieved.setVisible(false);
         buttonCancel.setVisible(false);
+        buttonViewEvidence.setVisible(false);
+        buttonUploadEvidence.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -90,6 +95,8 @@ public class OrderStatusView extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         textGreetings = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
+        buttonUploadEvidence = new javax.swing.JButton();
+        buttonViewEvidence = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -298,6 +305,24 @@ public class OrderStatusView extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel18.setText("Cancel Reason:");
 
+        buttonUploadEvidence.setBackground(new java.awt.Color(255, 153, 153));
+        buttonUploadEvidence.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        buttonUploadEvidence.setText("Upload Evidence");
+        buttonUploadEvidence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUploadEvidenceActionPerformed(evt);
+            }
+        });
+
+        buttonViewEvidence.setBackground(new java.awt.Color(255, 153, 153));
+        buttonViewEvidence.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        buttonViewEvidence.setText("View Evidence");
+        buttonViewEvidence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonViewEvidenceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -355,7 +380,11 @@ public class OrderStatusView extends javax.swing.JFrame {
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(textStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel18)))
+                            .addComponent(jLabel18)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(buttonUploadEvidence)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonViewEvidence))))
                     .addComponent(jScrollPane1))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -396,37 +425,46 @@ public class OrderStatusView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textProductionDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textCostumerName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(textTotalPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel17)
-                                    .addComponent(textPaymentMethod))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel15)
-                                    .addComponent(textStatus))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel17)
+                                            .addComponent(textPaymentMethod))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel20)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(9, 9, 9))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(textCostumerName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(textPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(textTotalPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel12)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(buttonUploadEvidence, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(buttonViewEvidence, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel15)
+                                            .addComponent(textStatus))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(buttonRecieved, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -540,41 +578,73 @@ public class OrderStatusView extends javax.swing.JFrame {
         String paymentMethod;
         switch (paymentMethodCode) {
             case "TRF":
-            paymentMethod = "TRANSFER";
-            switch (status) {
-                case "ORDERED":
-                    textPaymentInstruction.setText("Transaction has been register.\n" +
-                            "To complate the transaction please Transfer To\n" +
-                            "Rek: 088888888 AN: NI KT CATUR ADI SUKMA APSARI\n" +
-                            "and send evidence of transfer to WA: 0888888888 with message \n" +
-                            "ID TRANSACTION: (ID ORDER in table list order)");
-                    break;
-                case "CANCEL":
-                    textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
-                    break;
-                default:
-                    textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
-                    break;
-            }
+                evidence = detailTransaction.getEvidence();
+                paymentMethod = "TRANSFER";
+                switch (status) {
+                    case "ORDERED":
+                        if (evidence.equals("-")){
+                            buttonUploadEvidence.setVisible(true);
+                            buttonViewEvidence.setVisible(false);
+                            buttonCancel.setVisible(true);
+                                textPaymentInstruction.setText("Transaction has been register.\n" +
+                                    "To complate the transaction please Transfer To\n" +
+                                    "Rek: 088888888 AN: NI KT CATUR ADI SUKMA APSARI\n" +
+                                    "and upload evidence at button Upload Evidence below\n");
+                        }else {
+                            buttonUploadEvidence.setVisible(false);
+                            buttonViewEvidence.setVisible(true);
+                            buttonCancel.setVisible(false);
+                                textPaymentInstruction.setText("Transfer evidence has been uploaded.\n" +
+                                    "Wait admin accept and proccess your order\n");
+                        }
+                        break;
+                    case "CANCEL":
+                        buttonUploadEvidence.setVisible(false);
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
+                        break;
+                    default:
+                        if (evidence.equals("-")){
+                            buttonUploadEvidence.setVisible(true);
+                            buttonViewEvidence.setVisible(false);
+                        }else {
+                            buttonUploadEvidence.setVisible(false);
+                            buttonViewEvidence.setVisible(true);
+                        }
+                        textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
+                        break;
+                }
             break;
-
             case "COD":
-            paymentMethod = "CASH ON DELIVERY";
-            switch (status) {
-                case "SUCCESS":
-                    textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
-                    break;
-                case "CANCEL":
-                    textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
-                    break;
-                default:
-                    textPaymentInstruction.setText("Transaction has been register.\n" +
-                        "To complate the transaction please preprare money when \n" +
-                        "the courier arrives");
-                    break;
-            }
+                paymentMethod = "CASH ON DELIVERY";
+                switch (status) {
+                    case "ORDERED":
+                        buttonUploadEvidence.setVisible(false);
+                        buttonViewEvidence.setVisible(false);
+                        buttonCancel.setVisible(true);
+                        textPaymentInstruction.setText("Transaction has been register.\n" +
+                            "To complate the transaction please preprare money when \n" +
+                            "the courier arrives");
+                        break;
+                    case "SUCCESS":
+                        buttonUploadEvidence.setVisible(false);
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
+                        break;
+                    case "CANCEL":
+                        buttonUploadEvidence.setVisible(false);
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
+                        break;
+                    default:
+                        buttonUploadEvidence.setVisible(false);
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("Transaction has been register.\n" +
+                            "To complate the transaction please preprare money when \n" +
+                            "the courier arrives");
+                        break;
+                }
             break;
-
             default:
             paymentMethod = "";
             break;
@@ -596,7 +666,6 @@ public class OrderStatusView extends javax.swing.JFrame {
         switch (status) {
             case "ORDERED":
             buttonRecieved.setVisible(false);
-            buttonCancel.setVisible(true);
             break;
             case "PROCECED":
             buttonRecieved.setVisible(false);
@@ -618,6 +687,20 @@ public class OrderStatusView extends javax.swing.JFrame {
             break;
         }
     }//GEN-LAST:event_tableTransactionMouseClicked
+
+    private void buttonUploadEvidenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUploadEvidenceActionPerformed
+        int row = tableTransaction.getSelectedRow();
+        int idTransaction = (int) tableModel.getValueAt(row, 0);
+        UploadEvidenceTransferView uploadEvidenceTransferView = new UploadEvidenceTransferView(idTransaction);
+        uploadEvidenceTransferView.setVisible(true);
+    }//GEN-LAST:event_buttonUploadEvidenceActionPerformed
+
+    private void buttonViewEvidenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewEvidenceActionPerformed
+        int row = tableTransaction.getSelectedRow();
+        int idTransaction = (int) tableModel.getValueAt(row, 0);
+        EvidenceTransferView evidenceTransferView = new EvidenceTransferView(idTransaction, evidence);
+        evidenceTransferView.setVisible(true);
+    }//GEN-LAST:event_buttonViewEvidenceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -657,6 +740,8 @@ public class OrderStatusView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonRecieved;
+    private javax.swing.JButton buttonUploadEvidence;
+    private javax.swing.JButton buttonViewEvidence;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

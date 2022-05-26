@@ -278,6 +278,9 @@ public class SignUpView extends javax.swing.JFrame {
         }else if (phoneNumber.isEmpty() || phoneNumber.trim().toLowerCase().equals("phone number")){
             JOptionPane.showMessageDialog(rootPane, "Please fill in the phone number field");
             textPhoneNumber.requestFocus();
+        }else if  (textPhoneNumber.getText().matches("[0-9]+") == false){
+            JOptionPane.showMessageDialog(rootPane,"Phone Number must be number");
+            textPhoneNumber.requestFocus();
         }else if (address.isEmpty() || address.trim().toLowerCase().equals("address")){
             JOptionPane.showMessageDialog(rootPane, "Please fill in the address field");
             textAddress.requestFocus();
@@ -290,6 +293,9 @@ public class SignUpView extends javax.swing.JFrame {
         }else if (!(confirmPassword.equals(password))){
             JOptionPane.showMessageDialog(rootPane, "Confirm password is different from password");
             textConfirmPassword.requestFocus();
+        } else if (password.length()<4){
+            JOptionPane.showMessageDialog(rootPane, "Please fill min 4 character");
+            textPassword.requestFocus();
         } else {
             user.setName(name);
             user.setUsername(username);

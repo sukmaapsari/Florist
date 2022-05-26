@@ -14,7 +14,7 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
     Product product = new Product();
     DetailTransaction detailTransaction = new DetailTransaction();
     DefaultTableModel tableModel = new DefaultTableModel();
-    
+    String evidence;
     public ManajemenTransaksiView() {
         initComponents();
         getAllDataTransaction();
@@ -55,6 +55,7 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
         buttonDeliver.setVisible(false);
         buttonCancel.setVisible(false);
         buttonDeliver.setVisible(false);
+        buttonViewEvidence.setVisible(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -102,6 +103,7 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
         comboBoxStatus = new javax.swing.JComboBox<>();
         buttonSearch = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
+        buttonViewEvidence = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -331,6 +333,15 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel18.setText("Cancel Reason:");
 
+        buttonViewEvidence.setBackground(new java.awt.Color(255, 153, 153));
+        buttonViewEvidence.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        buttonViewEvidence.setText("View Evidence");
+        buttonViewEvidence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonViewEvidenceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -395,7 +406,8 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(textStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel18)))
+                            .addComponent(jLabel18)
+                            .addComponent(buttonViewEvidence)))
                     .addComponent(jScrollPane1))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -462,8 +474,10 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonViewEvidence, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel15)
                                     .addComponent(textStatus))
@@ -617,41 +631,64 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
         String paymentMethod;
         switch (paymentMethodCode) {
             case "TRF":
-            paymentMethod = "TRANSFER";
-            switch (status) {
-                case "ORDERED":
-                    textPaymentInstruction.setText("Transaction has been register.\n" +
-                            "To complate the transaction please Transfer To\n" +
-                            "Rek: 088888888 AN: NI KT CATUR ADI SUKMA APSARI\n" +
-                            "and send evidence of transfer to WA: 0888888888 with message \n" +
-                            "ID TRANSACTION: (ID ORDER in table list order)");
-                    break;
-                case "CANCEL":
-                    textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
-                    break;
-                default:
-                    textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
-                    break;
-            }
+                evidence = detailTransaction.getEvidence();
+                paymentMethod = "TRANSFER";
+                switch (status) {
+                    case "ORDERED":
+                        if (evidence.equals("-")){
+                            buttonProceced.setVisible(false);
+                            buttonViewEvidence.setVisible(false);
+                                textPaymentInstruction.setText("Transaction has been register.\n" +
+                                    "To complate the transaction please Transfer To\n" +
+                                    "Rek: 088888888 AN: NI KT CATUR ADI SUKMA APSARI\n" +
+                                    "and upload evidence at button Upload Evidence below\n");
+                        }else {
+                            buttonProceced.setVisible(true);
+                            buttonViewEvidence.setVisible(true);
+                                textPaymentInstruction.setText("Transfer evidence has been uploaded.\n" +
+                                    "Wait admin accept and proccess your order\n");
+                        }
+                        break;
+                    case "CANCEL":
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
+                        break;
+                    default:
+                        if (evidence.equals("-")){
+                            buttonViewEvidence.setVisible(false);
+                        }else {
+                            buttonViewEvidence.setVisible(true);
+                        }
+                        textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
+                        break;
+                }
             break;
-
             case "COD":
-            paymentMethod = "CASH ON DELIVERY";
-            switch (status) {
-                case "SUCCESS":
-                    textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
-                    break;
-                case "CANCEL":
-                    textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
-                    break;
-                default:
-                    textPaymentInstruction.setText("Transaction has been register.\n" +
-                        "To complate the transaction please preprare money when \n" +
-                        "the courier arrives");
-                    break;
-            }
+                paymentMethod = "CASH ON DELIVERY";
+                switch (status) {
+                    case "ORDERED":
+                        buttonProceced.setVisible(true);
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("Transaction has been register.\n" +
+                            "To complate the transaction please preprare money when \n" +
+                            "the courier arrives");
+                        break;
+                    case "SUCCESS":
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("PAYMENT HAS BEEN COMPLETE");
+                        break;
+                    case "CANCEL":
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("TRANSACTION HAS BEEN CANCEL");
+                        break;
+                    default:
+                        buttonViewEvidence.setVisible(false);
+                        textPaymentInstruction.setText("Transaction has been register.\n" +
+                            "To complate the transaction please preprare money when \n" +
+                            "the courier arrives");
+                        break;
+                }
             break;
-
             default:
             paymentMethod = "";
             break;
@@ -672,7 +709,6 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
 
         switch (status) {
             case "ORDERED":
-            buttonProceced.setVisible(true);
             buttonDeliver.setVisible(false);
             buttonCancel.setVisible(true);
             break;
@@ -771,6 +807,13 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonSearchActionPerformed
 
+    private void buttonViewEvidenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewEvidenceActionPerformed
+        int row = tableTransaction.getSelectedRow();
+        int idTransaction = (int) tableModel.getValueAt(row, 0);
+        EvidenceTransferView evidenceTransferView = new EvidenceTransferView(idTransaction,evidence);
+        evidenceTransferView.setVisible(true);
+    }//GEN-LAST:event_buttonViewEvidenceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -811,6 +854,7 @@ public class ManajemenTransaksiView extends javax.swing.JFrame {
     private javax.swing.JButton buttonDeliver;
     private javax.swing.JButton buttonProceced;
     private javax.swing.JButton buttonSearch;
+    private javax.swing.JButton buttonViewEvidence;
     private javax.swing.JComboBox<String> comboBoxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

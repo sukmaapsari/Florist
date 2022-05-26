@@ -169,6 +169,9 @@ public class SignInView extends javax.swing.JFrame {
         } else if (password.isEmpty() || password.trim().toLowerCase().equals("password")){
             JOptionPane.showMessageDialog(rootPane, "Please fill in the password field");
             textPassword.requestFocus();
+        } else if (password.length()<4){
+            JOptionPane.showMessageDialog(rootPane, "Please fill min 4 character");
+            textPassword.requestFocus();
         } else {
             user.setUsername(username);
             user.setPassword(password);

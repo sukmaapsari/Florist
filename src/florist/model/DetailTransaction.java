@@ -20,6 +20,7 @@ public class DetailTransaction extends DatabaseConnection {
     int productionDuration;
     String status;
     String note;
+    String evidence;
     
     public void setId(int id){
         this.id = id;
@@ -73,11 +74,15 @@ public class DetailTransaction extends DatabaseConnection {
         return note;
     }
     
+    public String getEvidence(){
+        return evidence;
+    }
+    
     
     public void getDetailTransaction(){
         try{
             getDatabaseConnection();
-            String query = "SELECT tb_product.name AS product,tb_transaction.qty,tb_transaction.price,tb_transaction.greetings,tb_transaction.production_duration,tb_user.name AS costumer,tb_user.phone_number,tb_transaction.address,tb_transaction.total_payment,tb_transaction.payment_method,tb_transaction.status,tb_transaction.note FROM tb_transaction\n" +
+            String query = "SELECT tb_product.name AS product,tb_transaction.qty,tb_transaction.price,tb_transaction.greetings,tb_transaction.production_duration,tb_user.name AS costumer,tb_user.phone_number,tb_transaction.address,tb_transaction.total_payment,tb_transaction.payment_method,tb_transaction.status,tb_transaction.note, tb_transaction.evidence FROM tb_transaction\n" +
                            "INNER JOIN tb_product ON tb_transaction.product=tb_product.id\n" +
                            "INNER JOIN tb_user ON tb_transaction.costumer=tb_user.id\n" +
                            "WHERE tb_transaction.id=?;";
@@ -97,6 +102,7 @@ public class DetailTransaction extends DatabaseConnection {
                 paymentMethod = result.getString("payment_method");
                 status = result.getString("status");
                 note = result.getString("note");
+                evidence = result.getString("evidence");
             } else {
                 System.out.println("Transaction not Found");
             }
